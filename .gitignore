@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+
+# Environment variables
+.env
+.env.local
+
+# Databases & Runtime Data
+*.db
+*.sqlite3
+backend/data/ciphertext/*
+backend/data/shares/*
+backend/data/temp/*
+!backend/data/ciphertext/.gitkeep
+!backend/data/shares/.gitkeep
+!backend/data/temp/.gitkeep
+
+# Logs
+*.log
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

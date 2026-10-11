@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custodian Governance Queue — VaultGuard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="brand">
+      <div class="brand-icon">
+        <svg style="width: 18px; height: 18px; fill: none; stroke: #ffffff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;" viewBox="0 0 24 24">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <path d="M9 12l2 2 4-4"></path>
+        </svg>
+      </div>
+      <span>VaultGuard</span>
+    </a>
+    <ul class="nav-links" id="navbar-links">
+      <!-- Injected by api.js -->
+    </ul>
+    <div class="nav-right" id="navbar-right">
+      <!-- Injected by api.js -->
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Custodian Governance Queue</h1>
+        <p class="page-subtitle">
+          Review incoming recovery requests and authorize cryptographic key reconstruction.
+        </p>
+      </div>
+      <div>
+        <span class="badge badge-custodian" style="padding: 0.4rem 0.85rem; font-size: 0.8rem;">
+          2 Approvals Required
+        </span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Pending Governance Authorizations</h2>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Backup Identifier</th>
+              <th>Justification</th>
+              <th>Status & Quorum</th>
+              <th>Submitted</th>
+              <th>Custodian Decision</th>
+            </tr>
+          </thead>
+          <tbody id="custodian-queue-tbody">
+            <!-- Populated by custodian.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="queue-empty-state" style="display: none; text-align: center; padding: 3.5rem 1rem;">
+        <h3 style="color: var(--brand-dark); margin-bottom: 0.5rem; font-size: 1.15rem;">Governance queue is clear</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          No pending recovery requests awaiting custodian quorum review.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/custodian.js"></script>
+</body>
+</html>

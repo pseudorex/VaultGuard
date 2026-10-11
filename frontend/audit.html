@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audit Ledger — VaultGuard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="brand">
+      <div class="brand-icon">
+        <svg style="width: 18px; height: 18px; fill: none; stroke: #ffffff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;" viewBox="0 0 24 24">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <path d="M9 12l2 2 4-4"></path>
+        </svg>
+      </div>
+      <span>VaultGuard</span>
+    </a>
+    <ul class="nav-links" id="navbar-links">
+      <!-- Injected by api.js -->
+    </ul>
+    <div class="nav-right" id="navbar-right">
+      <!-- Injected by api.js -->
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Tamper-Evident Audit Ledger</h1>
+        <p class="page-subtitle">
+          Cryptographically hash-chained event logs recording all backups, approvals, verifications, and restores.
+        </p>
+      </div>
+      <div>
+        <button id="verify-chain-btn" class="btn btn-primary">
+          <svg style="width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.2;" viewBox="0 0 24 24">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+          <span>Verify Hash Chain Integrity</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chain Result Notification -->
+    <div id="chain-result-box" style="display: none; margin-bottom: 1.5rem;">
+      <!-- Populated by audit.js -->
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Chained Event History</h2>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Timestamp (UTC)</th>
+              <th>Actor</th>
+              <th>Action</th>
+              <th>Target</th>
+              <th>Outcome</th>
+              <th>Cryptographic Hash Link</th>
+            </tr>
+          </thead>
+          <tbody id="audit-tbody">
+            <!-- Populated by audit.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="audit-empty-state" style="display: none; text-align: center; padding: 3.5rem 1rem;">
+        <h3 style="color: var(--brand-dark); margin-bottom: 0.5rem; font-size: 1.15rem;">Audit log is empty</h3>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/audit.js"></script>
+</body>
+</html>

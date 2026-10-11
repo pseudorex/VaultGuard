@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — VaultGuard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css?v=2.0">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="brand">
+      <div class="brand-icon">
+        <svg style="width: 18px; height: 18px; fill: none; stroke: #ffffff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;" viewBox="0 0 24 24">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <path d="M9 12l2 2 4-4"></path>
+        </svg>
+      </div>
+      <span>VaultGuard</span>
+    </a>
+    <ul class="nav-links" id="navbar-links">
+      <!-- Injected by api.js -->
+    </ul>
+    <div class="nav-right" id="navbar-right">
+      <!-- Injected by api.js -->
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Encrypted Backups Console</h1>
+        <p class="page-subtitle">Manage AES-256-GCM encrypted files and 2-of-3 Shamir key partitions.</p>
+      </div>
+      <div>
+        <button id="open-upload-modal-btn" class="btn btn-primary">
+          <svg style="width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5;" viewBox="0 0 24 24">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>New Secure Backup</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Metrics Stat Grid -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-icon olive">
+          <svg style="width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2.2;" viewBox="0 0 24 24">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+        </div>
+        <div>
+          <div class="stat-val" id="stat-total-backups">0</div>
+          <div class="stat-label">Total Backups</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon mint">
+          <svg style="width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2.2;" viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="stat-val" id="stat-active-backups">0</div>
+          <div class="stat-label">Active & Encrypted</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon green">
+          <svg style="width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2.2;" viewBox="0 0 24 24">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+        </div>
+        <div>
+          <div class="stat-val">2-of-3</div>
+          <div class="stat-label">Shamir Threshold</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon peach">
+          <svg style="width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2.2;" viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="stat-val">2 Custodians</div>
+          <div class="stat-label">Required Quorum</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backups Table Card -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Protected Files</h2>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>File Name & Identifier</th>
+              <th>Size</th>
+              <th>Encryption & Partitioning</th>
+              <th>Status</th>
+              <th>Created Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="backups-tbody">
+            <!-- Populated by dashboard.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="empty-state" style="display: none; text-align: center; padding: 3.5rem 1rem;">
+        <h3 style="color: var(--brand-dark); margin-bottom: 0.5rem; font-size: 1.15rem;">No backups stored yet</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 420px; margin: 0 auto 1.5rem auto;">
+          Click "New Secure Backup" to encrypt your first document with AES-256-GCM and 2-of-3 Shamir Secret Sharing.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Upload Modal -->
+  <div class="modal-overlay" id="upload-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 style="color: var(--brand-dark); font-size: 1.2rem; font-weight: 700;">Create Threshold Backup</h3>
+        <button class="modal-close" id="close-upload-modal-btn">&times;</button>
+      </div>
+
+      <form id="upload-form">
+        <div class="dropzone" id="dropzone">
+          <div class="dropzone-icon">
+            <svg style="width: 32px; height: 32px; stroke: currentColor; fill: none; stroke-width: 2;" viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+          </div>
+          <div style="font-weight: 700; color: var(--brand-dark); margin-bottom: 0.25rem; font-size: 0.95rem;">
+            Click to browse or drop file here
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">
+            Max 10 MB. Server generates fresh 256-bit DEK + 3 Shamir shares.
+          </div>
+          <input type="file" id="file-input" style="display: none;" required>
+        </div>
+
+        <div id="file-name-display" style="font-size: 0.85rem; color: var(--brand-green); margin: 0.85rem 0; font-weight: 600;"></div>
+
+        <div style="background: #f0f7f1; border: 1px solid #d2e7d4; padding: 0.85rem; border-radius: 8px; font-size: 0.8rem; color: #2d583b; margin-bottom: 1.25rem;">
+          <strong>Security Notice:</strong> The raw encryption key is divided into 3 shares. No individual custodian or server can decrypt the payload without 2 authorizations.
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem; font-size: 0.95rem;">
+          Encrypt & Store Backup
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
